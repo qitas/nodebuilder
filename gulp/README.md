@@ -17,6 +17,15 @@ npm install gulp -g
 
 * 不要使用cnpm进行安装，测试无法正常执行。
 
+### 设备模拟
+
+```
+npm update
+node wserver.js
+
+chrome.exe --args --disable-web-security -–allow-file-access-from-files --user-data-dir="C:\Users\Qitas"
+```
+
 ### 文件说明
 
 package.json是基于nodejs项目必不可少的配置文件，它是存放在项目根目录的普通json文件，package.json是一个普通json文件，所以不能添加任何注释。
