@@ -10,25 +10,25 @@ var pump = require('pump');
 
 gulp.task('esprfidjsminify', function (cb) {
   pump([
-        gulp.src('../src/websrc/js/esprfid.js'),
+        gulp.src('../../src/websrc/js/esprfid.js'),
         uglify(),
-        gulp.dest('../src/websrc/gzipped/js/'),
+        gulp.dest('../../src/websrc/gzipped/js/'),
     ],
     cb
     );
 });
 
 gulp.task("esprfidjsgz", ["esprfidjsminify"], function() {
-    return gulp.src("../src/websrc/gzipped/js/esprfid.js")
+    return gulp.src("../../src/websrc/gzipped/js/esprfid.js")
         .pipe(gzip({
             append: true
         }))
-    .pipe(gulp.dest('../src/websrc/gzipped/js/'));
+    .pipe(gulp.dest('../../src/websrc/gzipped/js/'));
 });
 
 gulp.task('esprfidjsgzh', ["esprfidjsgz"] , function() {
-    var source = "../src/websrc/gzipped/js/" + "esprfid.js.gz";
-    var destination = "../src/webh/" + "esprfid.js.gz.h";
+    var source = "../../src/websrc/gzipped/js/" + "esprfid.js.gz";
+    var destination = "../../src/webh/" + "esprfid.js.gz.h";
  
     var wstream = fs.createWriteStream(destination);
     wstream.on('error', function (err) {
@@ -54,8 +54,8 @@ gulp.task('esprfidjsgzh', ["esprfidjsgz"] , function() {
 
 gulp.task("scripts", ["scripts-concat"], function() {
 
-    var source = "../src/websrc/gzipped/js/" + "required.js.gz";
-    var destination = "../src/webh/" + "required.js.gz.h";
+    var source = "../../src/websrc/gzipped/js/" + "required.js.gz";
+    var destination = "../../src/webh/" + "required.js.gz.h";
  
     var wstream = fs.createWriteStream(destination);
     wstream.on('error', function (err) {
@@ -79,43 +79,43 @@ gulp.task("scripts", ["scripts-concat"], function() {
 });
 
 gulp.task('scripts-concat', ["esprfidjsgzh"], function() {
-    return gulp.src(['../src/websrc/3rdparty/js/jquery-1.12.4.min.js', '../src/websrc/3rdparty/js/bootstrap-3.3.7.min.js', '../src/websrc/3rdparty/js/footable-3.1.6.min.js'])
+    return gulp.src(['../../src/websrc/3rdparty/js/jquery-1.12.4.min.js', '../../src/websrc/3rdparty/js/bootstrap-3.3.7.min.js', '../../src/websrc/3rdparty/js/footable-3.1.6.min.js'])
         .pipe(concat({
             path: 'required.js',
             stat: {
                 mode: 0666
             }
         }))
-        .pipe(gulp.dest('../src/websrc/js/'))
+        .pipe(gulp.dest('../../src/websrc/js/'))
         .pipe(gzip({
             append: true
         }))
-        .pipe(gulp.dest('../src/websrc/gzipped/js/'));
+        .pipe(gulp.dest('../../src/websrc/gzipped/js/'));
 });
 
 
 
 gulp.task('styles-concat', function() {
-    return gulp.src(['../src/websrc/3rdparty/css/bootstrap-3.3.7.min.css', '../src/websrc/3rdparty/css/footable.bootstrap-3.1.6.min.css', '../src/websrc/3rdparty/css/sidebar.css'])
+    return gulp.src(['../../src/websrc/3rdparty/css/bootstrap-3.3.7.min.css', '../../src/websrc/3rdparty/css/footable.bootstrap-3.1.6.min.css', '../../src/websrc/3rdparty/css/sidebar.css'])
         .pipe(concat({
             path: 'required.css',
             stat: {
                 mode: 0666
             }
         }))
-        .pipe(gulp.dest('../src/websrc/css/'))
+        .pipe(gulp.dest('../../src/websrc/css/'))
         .pipe(gzip({
             append: true
         }))
-        .pipe(gulp.dest('../src/websrc/gzipped/css/'));
+        .pipe(gulp.dest('../../src/websrc/gzipped/css/'));
 });
 
 
 
 gulp.task("styles", ["styles-concat"], function() {
 
-    var source = "../src/websrc/gzipped/css/" + "required.css.gz";
-    var destination = "../src/webh/" + "required.css.gz.h";
+    var source = "../../src/websrc/gzipped/css/" + "required.css.gz";
+    var destination = "../../src/webh/" + "required.css.gz.h";
  
     var wstream = fs.createWriteStream(destination);
     wstream.on('error', function (err) {
@@ -140,19 +140,19 @@ gulp.task("styles", ["styles-concat"], function() {
 
 
 gulp.task("fontgz", function() {
-	return gulp.src("../src/websrc/3rdparty/fonts/*.*")
-	.pipe(gulp.dest("../src/websrc/fonts/"))
+	return gulp.src("../../src/websrc/3rdparty/fonts/*.*")
+	.pipe(gulp.dest("../../src/websrc/fonts/"))
         .pipe(gzip({
             append: true
         }))
-    .pipe(gulp.dest('../src/websrc/gzipped/fonts/'));
+    .pipe(gulp.dest('../../src/websrc/gzipped/fonts/'));
 });
 
 gulp.task("fonts", ["fontgz"], function() {
-    return gulp.src("../src/websrc/gzipped/fonts/*.*")
+    return gulp.src("../../src/websrc/gzipped/fonts/*.*")
         .pipe(flatmap(function(stream, file) {
 			var filename = path.basename(file.path);
-            var wstream = fs.createWriteStream("../src/webh/" + filename + ".h");
+            var wstream = fs.createWriteStream("../../src/webh/" + filename + ".h");
             wstream.on("error", function(err) {
                 gutil.log(err);
             });
@@ -174,28 +174,28 @@ gulp.task("fonts", ["fontgz"], function() {
 });
 
 gulp.task('htmlsprep', function() {
-    return gulp.src('../src/websrc/*.htm*')
+    return gulp.src('../../src/websrc/*.htm*')
         .pipe(htmlmin({collapseWhitespace: true, minifyJS: true}))
-        .pipe(gulp.dest('../src/websrc/gzipped/'))
+        .pipe(gulp.dest('../../src/websrc/gzipped/'))
         .pipe(gzip({
             append: true
         }))
-        .pipe(gulp.dest('../src/websrc/gzipped/'));
+        .pipe(gulp.dest('../../src/websrc/gzipped/'));
 });
 
 gulp.task("htmlsgz", ["htmlsprep"], function() {
-    return gulp.src("../src/websrc/*.htm*")
+    return gulp.src("../../src/websrc/*.htm*")
         .pipe(gzip({
             append: true
         }))
-    .pipe(gulp.dest('../src/websrc/gzipped/'));
+    .pipe(gulp.dest('../../src/websrc/gzipped/'));
 });
 
 gulp.task("htmls", ["htmlsgz"], function() {
-    return gulp.src("../src/websrc/gzipped/*.gz")
+    return gulp.src("../../src/websrc/gzipped/*.gz")
         .pipe(flatmap(function(stream, file) {
             var filename = path.basename(file.path);
-            var wstream = fs.createWriteStream("../src/webh/" + filename + ".h");
+            var wstream = fs.createWriteStream("../../src/webh/" + filename + ".h");
             wstream.on("error", function(err) {
                 gutil.log(err);
             });
