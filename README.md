@@ -1,4 +1,7 @@
-﻿# [WEB tools](https://github.com/Qitas/webtool) 
+﻿# [web tools](https://github.com/Qitas/webtool) 
+
+
+### [收录资源](https://github.com/Qitas/webtool) 
 
 * [node](node/) 
     * [gulp](gulp/) 
