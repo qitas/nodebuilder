@@ -1,10 +1,9 @@
-﻿# [web tools](https://github.com/Qitas/webtool) 
+﻿# [nodebuilder](https://github.com/Qitas/nodebuilder) 
 
 
-### [收录资源](https://github.com/Qitas/webtool) 
+### [收录资源](https://github.com/Qitas/nodebuilder) 
 
-* [node](node/) 
-    * [gulp](gulp/) 
+* [gulp file](gulp/) 
 
 
 [![sites](qitas/qitas.png)](http://www.qitas.cn)
